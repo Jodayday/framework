@@ -4,7 +4,11 @@ IT영단어 및 명령어, 개발도구의 사용법 및 개념원리를 출제�
 
 ## 개발환경
 
-python fast_api  
+python
+
+- fastapi
+- uvicorn[standard]
+
 db mysql
 
 ## 목적
@@ -18,3 +22,7 @@ db mysql
 문제등록  
 풀이확인  
 문제확인
+
+## 실행
+
+uvicorn main:app
