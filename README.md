@@ -26,3 +26,8 @@ db mysql
 ## 실행
 
 uvicorn main:app
+
+## api 확인
+
+/docs  
+/redoc
