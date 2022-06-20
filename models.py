@@ -16,8 +16,8 @@ class Problem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
-    choice = db.Column(db.String(255))
-    img = db.Column(db.LargeBinary)
+    # choice = db.Column(db.String(255))
+    # img = db.Column(db.LargeBinary)
     text = db.Column(db.String(255), nullable=False)
 
 
@@ -26,5 +26,5 @@ class Solve(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     problem_id = db.Column(db.Integer, db.ForeignKey("problems.id"))
-    answer = db.Column(db.String)
+    answer = db.Column(db.String(255))
     check = db.Column(db.Boolean)

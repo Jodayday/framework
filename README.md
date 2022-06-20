@@ -7,8 +7,9 @@ IT영단어 및 명령어, 개발도구의 사용법 및 개념원리를 출제�
 python
 
 - flask
-
-db mysql
+- flask-SQLAlchemy
+- pymysql
+  db mysql
 
 ## 목적
 
@@ -24,9 +25,4 @@ db mysql
 
 ## 실행
 
-uvicorn main:app
-
-## api 확인
-
-/docs  
-/redoc
+python app.py

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>IT 학습 : 문제</title>
+<style>
+    .table-body{
+        width: 100%;
+        table-layout: fixed;
+    }
+
+.lenght-mt{
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 40%;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% if list %}
+<table class="table container table-body table-hover">
+    <thead class=" align-middle text-center ">
+      <tr>
+        <th scope="col" style="width: 6%;">번호</th>
+        <th scope="col" style="width: 20%">문제</th>
+        <th scope="col" style="width: 60%">정답</th>
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+        {% for pro in list %}
+        <tr onclick="location.href='/problem/{{pro.id}}'">
+            
+            <th scope="row"  class=""> {{pro.id}}</th>
+            <td class="lenght-mt">{{pro.title}}</td>
+            <td class="lenght-mt">{{pro.text}}</td>
+       
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endif %}
+
+{% endblock %}

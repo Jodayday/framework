@@ -11,6 +11,35 @@
 
 </head>
 <body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <div class="logo">로고</div>
+                </a>
+                    
+                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                            <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+                            <li><a href="/start/" class="nav-link px-2 text-white">문제풀기</a></li>
+                            <li><a href="#" class="nav-link px-2 text-white">풀이확인</a></li>
+                            <li><a href="#" class="nav-link px-2 text-white">문제등록</a></li>
+                            <li><a href="/problem/" class="nav-link px-2 text-white">문제확인</a></li>
+                        </ul>
+    
+                    <div class="text-end">
+                        {% if user %}
+                        <a href='/logout/'class="btn btn-outline-light me-">로그아웃</a>
+                        {% else %}
+                        <a href="/login/" class="btn btn-outline-light me-2">로그인</a>
+                        <a href="/register/" class="btn btn-warning">회원가입</a>
+                        {% endif %}
+                    </div>
+    
+            </div>
+        </div>
+    </header>
+    
     {% block body%}
     {% endblock %}
 </body>

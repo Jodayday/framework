@@ -1,2 +1,4 @@
 __pycache__/
 study.*
+db.sqlite
+secrets.json

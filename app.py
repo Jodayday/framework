@@ -1,4 +1,5 @@
 import os
+import json
 
 from flask import Flask
 from flask import render_template
@@ -8,9 +9,9 @@ from flask import session
 from flask_wtf.csrf import CSRFProtect
 
 from models import db
-from models import User
+from models import User, Problem, Solve
 
-from forms import RegisterForm, LoginFrom
+from forms import RegisterForm, LoginFrom, GetForm
 
 
 app = Flask(__name__)
@@ -57,10 +58,41 @@ def join():
     return render_template('register.html', Register=form)
 
 
+@app.route('/problem/<int:count>/')
+def problem(count: int = None):
+    problem = Problem.query.filter_by(id=count).first()
+    return render_template('one_problem.html', problem=problem)
+
+
+@app.route('/problem/')
+def problems():
+    problem = Problem.query.all()
+    return render_template('problem.html', list=problem)
+
+# # 문제 등록
+# @app.route('/problem/')
+# def create_problems():
+#     problem = Problem.query.all()
+#     return render_template('problem.html', list=problem)
+
+
+@app.route('/start/', methods=['GET', 'POST'])
+def start():
+    form = GetForm()
+    dicts = request.args.to_dict()
+    if dicts != None:
+        tn = dicts.get('tn')
+        print(tn)
+    return render_template('start.html', form=form)
+
 # db 설정
-basedir = os.path.abspath(os.path.dirname(__file__))
-dbfile = os.path.join(basedir, 'db.sqlite')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SECRET_FILE = os.path.join(BASE_DIR, 'secrets.json')
+secrets = json.loads(open(SECRET_FILE).read())
+DB = secrets["DB"]
+app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{DB['user']}:{DB['password']}@{DB['host']}:{DB['port']}/{DB['database']}"
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'dlatltlzmfltzltkdyd'

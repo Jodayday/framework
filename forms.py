@@ -8,6 +8,10 @@ from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 from models import User
 
 
+class GetForm(FlaskForm):
+    pass
+
+
 class RegisterForm(FlaskForm):
     username = StringField('username', validators=[
                            DataRequired(message="값을 입력하세요")])
