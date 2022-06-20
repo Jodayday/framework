@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>IT 학습 메인 : 로그인</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row mt-5">
+        <h1>로그인</h1>
+    </div>
+    <div class="row mt-5">
+        <form action="." method="post">
+            {{ login.csrf_token }}
+            <div class="form-group">
+                {{ login.userid.label("아이디") }}
+                {{ login.userid(class="form-control", placeholder='아이디') }}
+                {% if login.userid.errors %}{{ login.userid.errors.0 }}{% endif %}
+            </div>
+            <div class="form-group">
+                {{ login.userpw.label("비밀번호") }}
+                {{ login.userpw(class="form-control", placeholder='비밀번호') }}
+
+                {% if login.userpw.errors %}{{ login.userpw.errors.0 }}{% endif %}
+            </div>
+
+                <button type="submit" class="btn btn-primary mt-2">로그인</button>
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}

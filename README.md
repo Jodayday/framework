@@ -6,8 +6,7 @@ IT영단어 및 명령어, 개발도구의 사용법 및 개념원리를 출제�
 
 python
 
-- fastapi
-- uvicorn[standard]
+- flask
 
 db mysql
 

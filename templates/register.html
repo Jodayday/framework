@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>IT 학습 메인 : 회원가입</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-5">
+        <h1>회원가입</h1>
+    </div>
+    <div class="row mt-5">
+        <form action="." method="post">
+            {{ Register.csrf_token }}
+            <div class="form-group">
+                {{ Register.username.label("사용자 이름") }}
+                {{ Register.username(class="form-control", placeholder='사용자 이름') }}
+                {% if Register.username.errors %}{{ Register.username.errors[0] }}{% endif %}
+            </div>
+            <div class="form-group">
+                {{ Register.userid.label("아이디") }}
+                {{ Register.userid(class="form-control", placeholder='아이디') }}
+                {% if Register.userid.errors %}{{ Register.userid.errors[0] }}{% endif %}
+            </div>
+            <div class="form-group">
+                {{ Register.userpw.label("비밀번호") }}
+                {{ Register.userpw(class="form-control", placeholder='비밀번호') }}
+                {% if Register.userpw.errors %}{{ Register.userpw.errors[0] }}{% endif %}
+            </div>
+            <div class="form-group">
+                {{ Register.userpw_check.label("비밀번호확인") }}
+                {{ Register.userpw_check(class="form-control", placeholder='비밀번호확인') }}
+                {% if Register.userpw_check.errors %}{{ Register.userpw_check.errors[0] }}{% endif %}
+            </div>
+
+                <button type="submit" class="btn btn-primary mt-2">등록</button>
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}
