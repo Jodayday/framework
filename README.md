@@ -9,6 +9,7 @@ python
 - flask
 - flask-SQLAlchemy
 - pymysql
+
   db mysql
 
 ## 목적
