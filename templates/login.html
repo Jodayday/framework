@@ -1,44 +1,43 @@
-{% extends "base.html" %}
-
-{% block head %}
+{% extends "base.html" %} {% block head %}
 <title>IT 학습 : 로그인</title>
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block body %}
 
 <div class="container">
-
-    <div class="row mt-5 ">
+    <div class="row mt-5">
         <div class="col"></div>
-        <div class="col text-center "><h1>로그인</h1></div>
+        <div class="col text-center">
+            <h1>로그인</h1>
+        </div>
         <div class="col"></div>
     </div>
 
     <div class="row mt-5">
         <div class="col"></div>
         <div class="col">
-        <form action="." method="post">
-            {{ login.csrf_token }}
-            <div class="form-group">
-                {{ login.userid.label("아이디") }}
-                {{ login.userid(class="form-control", placeholder='아이디') }}
-                {% if login.userid.errors %}{{ login.userid.errors.0 }}{% endif %}
-            </div>
-            <div class="form-group">
-                {{ login.userpw.label("비밀번호") }}
-                {{ login.userpw(class="form-control", placeholder='비밀번호') }}
-                {% if login.userpw.errors %}{{ login.userpw.errors.0 }}{% endif %}
-            </div>
-            <div class="row">
-            <div class="col"></div>
-            <div class="col"  style="text-align:center;"><button type="submit" class="btn btn-primary mt-2 btn-block">로그인</button></div>
-            <div class="col"></div>
-            </div>
-                
-        </form>
-    </div>
+            <form action="." method="post">
+                {{ login.csrf_token }}
+                <div class="form-group">
+                    {{ login.userid.label("아이디") }} {{
+                    login.userid(class="form-control", placeholder='아이디') }} {% if
+                    login.userid.errors %}{{ login.userid.errors.0 }}{% endif %}
+                </div>
+                <div class="form-group">
+                    {{ login.userpw.label("비밀번호") }} {{
+                    login.userpw(class="form-control", placeholder='비밀번호') }} {% if
+                    login.userpw.errors %}{{ login.userpw.errors.0 }}{% endif %}
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col" style="text-align: center">
+                        <button type="submit" class=" btn btn-primary mt-2 btn-block">
+                            로그인
+                        </button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </form>
+        </div>
         <div class="col"></div>
     </div>
-
 </div>
 {% endblock %}

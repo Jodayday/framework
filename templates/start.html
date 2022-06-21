@@ -1,46 +1,52 @@
-{% extends "base.html" %}
-
-{% block head %}
+{% extends "base.html" %} {% block head %}
 <title>IT 학습 : 문제풀기</title>
 <style>
-  input{
+  input {
     width: 50%;
   }
 </style>
-{% endblock %}
-
-{% block body %}
-
-{% if pro %}
+{% endblock %} {% block body %} {% if pro %}
 <div class="container mt-5">
-<form  class="form-control" action="/submission/" method="get">
-{% for x in pro %}
+  <form class="form-control" action="/submission/" method="get">
 
-  <div>
-  <p>{{x.id}}번 {{x.title}}</p>
-  <input type="text" name="{{x.id}}" id="">
-  </div>
+    {% for x in pro %}
 
-{% endfor %}
-<div class="row">
-<input class="btn btn-primary m-3 col " type="submit" value="제출">
+    <div class="row">
+      <div class="col justify-content-center">
+        <div class="row mt-2">
+          문제 : {{x.title}}
+        </div>
+        <div class="row mt-2">
+          <textarea name="{{x.id}}" cols="100" rows="5" placeholder="정답을 적으세요"></textarea>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col" style="text-align: center">
+        <input class="btn btn-primary mt-3 col btn-block" type="submit" value="제출" />
+      </div>
+      <div class="col"></div>
+    </div>
+  </form>
 </div>
-</form>
-</div>
-
 
 {% else %}
-<div class="container mt-5 text-center ">
-    <h3>몇개의 문제를 풀겠습니까?</h3>
-    <form action="." method="get" >
-
-        <!-- {{form.csrf_token}} -->
-        <label for=""></label>
-        <input type="number" min="1" max="9" name="tn">
-        <input type="submit" value="제출">
-    </form>
+<div class="container mt-5 text-center">
+  <h3>몇개의 문제를 풀겠습니까?</h3>
+  <form action="." method="get">
+    <!-- {{form.csrf_token}} -->
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <input type="number" min="1" max="9" name="tn" class="mt-5" />
+        <input type="submit" value="제출" class="mt-2" />
+      </div>
+      <div class="col"></div>
+    </div>
+  </form>
 </div>
-{% endif %}
-
-
-{% endblock %}
+{% endif %} {% endblock %}
