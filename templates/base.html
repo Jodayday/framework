@@ -22,14 +22,15 @@
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                             <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                             <li><a href="/start/" class="nav-link px-2 text-white">문제풀기</a></li>
-                            <li><a href="#" class="nav-link px-2 text-white">풀이확인</a></li>
-                            <li><a href="#" class="nav-link px-2 text-white">문제등록</a></li>
+                            <li><a href="/check/" class="nav-link px-2 text-white">풀이확인</a></li>
+                            <li><a href="/create/" class="nav-link px-2 text-white">문제등록</a></li>
                             <li><a href="/problem/" class="nav-link px-2 text-white">문제확인</a></li>
                         </ul>
     
                     <div class="text-end">
                         {% if user %}
-                        <a href='/logout/'class="btn btn-outline-light me-">로그아웃</a>
+                        <p class="btn btn-outline-light mt-3">{{user}} 님</p>
+                        <a href='/logout/'class="btn btn-outline-light me-2">로그아웃</a>
                         {% else %}
                         <a href="/login/" class="btn btn-outline-light me-2">로그인</a>
                         <a href="/register/" class="btn btn-warning">회원가입</a>

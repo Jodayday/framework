@@ -1,5 +1,6 @@
 import os
 import json
+import random
 
 from flask import Flask
 from flask import render_template
@@ -7,6 +8,7 @@ from flask import redirect
 from flask import request
 from flask import session
 from flask_wtf.csrf import CSRFProtect
+import requests
 
 from models import db
 from models import User, Problem, Solve
@@ -16,11 +18,15 @@ from forms import RegisterForm, LoginFrom, GetForm
 
 app = Flask(__name__)
 
+# 메인페이지
+
 
 @app.route('/')
 def hello():
     username = session.get('username', '')
     return render_template('index.html', user=username)
+
+# 로그인
 
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -32,12 +38,16 @@ def login():
         return redirect('/')
     return render_template('login.html', login=form)
 
+# 로그아웃
+
 
 @app.route('/logout/')
 def logout():
     del session['username']
     # session.pop('username')
     return redirect('/')
+
+# 회원가입
 
 
 @app.route('/register/', methods=['GET', 'POST'])
@@ -57,11 +67,15 @@ def join():
 
     return render_template('register.html', Register=form)
 
+# 개별 문제 확인
+
 
 @app.route('/problem/<int:count>/')
 def problem(count: int = None):
     problem = Problem.query.filter_by(id=count).first()
     return render_template('one_problem.html', problem=problem)
+
+# 문제들 확인
 
 
 @app.route('/problem/')
@@ -75,15 +89,77 @@ def problems():
 #     problem = Problem.query.all()
 #     return render_template('problem.html', list=problem)
 
+# 문제 풀기
+
 
 @app.route('/start/', methods=['GET', 'POST'])
 def start():
     form = GetForm()
     dicts = request.args.to_dict()
-    if dicts != None:
-        tn = dicts.get('tn')
-        print(tn)
+    if dicts:
+        # 문제수 선택 완료
+        tn = int(dicts.get('tn'))
+        problems = Problem.query.all()
+        select_problems = random.choices(problems, k=tn)
+        return render_template('start.html', form=form, pro=select_problems)
     return render_template('start.html', form=form)
+
+# 문제 제출
+
+
+@app.route('/submission/')
+def subminssion():
+    dicts = request.args.to_dict()
+    user = session.get('username')
+    user_id = User.query.filter_by(username=user).first()
+    if dicts:
+        for k, v in dicts.items():
+            info = Solve()
+            info.user_id = user_id.id
+            info.problem_id = int(k)
+            info.answer = v
+            db.session.add(info)
+            db.session.commit()
+    return redirect('/')
+
+# 풀이 확인
+
+
+@app.route('/check/')
+def checks():
+    solve = Solve.query.all()
+    return render_template('check.html', list=solve)
+# 개별풀이 확인
+
+
+@app.route('/check/<int:count>/')
+def check(count: int = None):
+    dicts = request.args.to_dict()
+    if dicts:
+        one = Solve.query.filter_by(id=count).first()
+        one.check = int(dicts.get('check'))
+        db.session.add(one)
+        db.session.commit()
+        return redirect('/check/')
+    sovle = Solve.query.filter_by(id=count).first()
+    return render_template('one_check.html', sovle=sovle)
+
+# 문제등록
+
+
+@app.route('/create/')
+def create():
+    dicts = request.args.to_dict()
+    print(dicts)
+    if dicts:
+        problem = Problem()
+        problem.title = dicts.get('title')
+        problem.text = dicts.get('text')
+        db.session.add(problem)
+        db.session.commit()
+        return redirect('/')
+    return render_template('create.html')
+
 
 # db 설정
 

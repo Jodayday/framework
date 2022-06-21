@@ -2,46 +2,45 @@
 
 {% block head %}
 <title>IT 학습 : 문제풀기</title>
-
+<style>
+  input{
+    width: 50%;
+  }
+</style>
 {% endblock %}
 
 {% block body %}
 
+{% if pro %}
+<div class="container mt-5">
+<form  class="form-control" action="/submission/" method="get">
+{% for x in pro %}
+
+  <div>
+  <p>{{x.id}}번 {{x.title}}</p>
+  <input type="text" name="{{x.id}}" id="">
+  </div>
+
+{% endfor %}
+<div class="row">
+<input class="btn btn-primary m-3 col " type="submit" value="제출">
+</div>
+</form>
+</div>
+
+
+{% else %}
 <div class="container mt-5 text-center ">
-    <h3>몇개의 문자를 풀겠습니까?</h3>
+    <h3>몇개의 문제를 풀겠습니까?</h3>
     <form action="." method="get" >
+
         <!-- {{form.csrf_token}} -->
         <label for=""></label>
         <input type="number" min="1" max="9" name="tn">
         <input type="submit" value="제출">
-
     </form>
-
-
 </div>
-{% if list %}
-<table class="table container table-body table-hover">
-    <thead class=" align-middle text-center ">
-      <tr>
-        <th scope="col" style="width: 6%;">번호</th>
-        <th scope="col" style="width: 20%">문제</th>
-        <th scope="col" style="width: 60%">정답</th>
-      </tr>
-    </thead>
-    <tbody class="align-middle">
-        {% for pro in list %}
-        <tr onclick="location.href='/problem/{{pro.id}}'">
-            
-            <th scope="row"  class=""> {{pro.id}}</th>
-            <td class="lenght-mt">{{pro.title}}</td>
-            <td class="lenght-mt">{{pro.text}}</td>
-       
-          </tr>
-        {% endfor %}
-    </tbody>
-  </table>
-
-
 {% endif %}
+
 
 {% endblock %}

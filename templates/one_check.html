@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>IT 학습 : {{sovle.id}} 풀이</title>
+<style>
+    .body{
+        width: 70%;
+    }
+
+.lenght-mt{
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 40%;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% if sovle %}
+
+<div class="container mt-5">
+    <h3>문제 {{sovle.problem_id}} 질문</h3>
+    <p class="mt-5">{{sovle.answer}}</p>
+    <p class="mt-5">정답내용</p>
+
+    <div class="row">
+    <form action="." method="get" class="col-1">
+        <input name="check" value="1" hidden>
+        <input type="submit" value="정답" class="btn btn-primary" >
+    </form>
+    <form action="." method="get" class="col-1">
+        <input name="check" value="0" hidden>
+        <input type="submit" value="틀림"class="btn btn-primary"  >
+    </form>
+    </div>
+</div>
+
+
+{% else %}
+<div class="container text-center">해당 문제는 없습니다.</div>
+{% endif %}
+
+{% endblock %}

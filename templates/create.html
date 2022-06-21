@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>IT 학습 : 문제등록</title>
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container mt-5">
+    <form action="." method="get" class="form-control">
+    <h3>문제 등록</h3>
+    <label for="title">문제명</label>
+    <input type="text" name="title" id="title">
+
+    <label for="text">답</label>
+    <input type="text" name="text" id="text">
+
+    <input type="submit" value="문제 등록"class="btn btn-primary" >
+</form>
+</div>
+
+
+
+{% endblock %}
