@@ -98,9 +98,10 @@ def start():
     dicts = request.args.to_dict()
     if dicts:
         # 문제수 선택 완료
-        tn = int(dicts.get('tn'))
+        number = int(dicts.get('number'))
         problems = Problem.query.all()
-        select_problems = random.choices(problems, k=tn)
+        select_problems = random.choices(problems, k=number)
+        select_problems = set(select_problems)
         return render_template('start.html', form=form, pro=select_problems)
     return render_template('start.html', form=form)
 
