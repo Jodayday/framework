@@ -130,7 +130,9 @@ def subminssion():
 
 @app.route('/check/')
 def checks():
-    solve = Solve.query.all()
+    page = request.args.get('page', type=int, default=1)  # 페이지
+    solve = Solve.query.order_by(Solve.check)
+    solve = solve.paginate(page, per_page=15)
     return render_template('check.html', list=solve)
 # 개별풀이 확인
 

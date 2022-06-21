@@ -24,7 +24,11 @@ class Problem(db.Model):
 class Solve(db.Model):
     __tablename__ = "solves"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    problem_id = db.Column(db.Integer, db.ForeignKey("problems.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        "users.id", ondelete='CASCADE'))
+    problem_id = db.Column(db.Integer, db.ForeignKey(
+        "problems.id", ondelete='CASCADE'))
     answer = db.Column(db.String(255))
     check = db.Column(db.Boolean)
+    user = db.relationship("User", backref=db.backref('user_set'))
+    problem = db.relationship("Problem", backref=db.backref('problem_set'))
