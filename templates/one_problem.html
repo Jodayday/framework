@@ -1,36 +1,24 @@
-{% extends "base.html" %}
-
-{% block head %}
+{% extends "base.html" %} {% block head %}
 <title>IT 학습 : {{problem.id}} 문제</title>
-<style>
-    .body{
-        width: 70%;
-    }
 
-.lenght-mt{
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 40%;
-}
-
-</style>
-{% endblock %}
-
-{% block body %}
-
+{% endblock %} {% block body %}
 {% if problem %}
 
 <div class="container mt-5">
     <h3>문제 {{problem.id}}. {{problem.title}}</h3>
-    <p class="mt-5">{{problem.text}}</p>
-    <p>이미지도 추가하면 좋지... 않을까요?</p>
-</div>
 
+    <div class="card mt-5">
+        <div class="card-body">
+            <label>정답</label>
+            <p class="mt-2">{{problem.text}}</p>
+        </div>
+    </div>
+    <div class="row  row-cols-3">
+        <div class="col-2 mt-3"><a href="/problem/" class="btn btn-primary">목록으로</a></div>
+    </div>
+</div>
 
 {% else %}
 <div class="container text-center">해당 문제는 없습니다.</div>
 {% endif %}
-
 {% endblock %}

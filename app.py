@@ -80,7 +80,9 @@ def problem(count: int = None):
 
 @app.route('/problem/')
 def problems():
-    problem = Problem.query.all()
+    page = request.args.get('page', type=int, default=1)  # 페이지
+    problem = Problem.query.order_by(Problem.id.desc())
+    problem = problem.paginate(page, per_page=15)
     return render_template('problem.html', list=problem)
 
 # # 문제 등록
