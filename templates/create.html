@@ -10,18 +10,27 @@
 
 
 <div class="container mt-5">
-    <form action="." method="get" class="form-control">
-    <h3>문제 등록</h3>
-    <label for="title">문제명</label>
-    <input type="text" name="title" id="title">
+    <form action="." method="get" class="">
+        <div class="row">
+            <div class="row">
+                <h3>문제 등록</h3>
+            </div>
+            <div class="col-8">
+                <label for="title" style="display: block;">문제명</label>
+                <textarea type="text" name="title" id="title" cols="100" rows="5"></textarea>
+            </div>
+            <div class="col">나중에 이미지 추가 구역입니다.</div>
 
-    <label for="text">답</label>
-    <input type="text" name="text" id="text">
-
-    <input type="submit" value="문제 등록"class="btn btn-primary" >
-</form>
+            <div>
+                <div class="col-8">
+                    <label for="text" style="display: block;">답</label>
+                    <textarea type="text" name="text" id="text" cols="100" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="문제 등록" class="btn btn-primary">
+    </form>
 </div>
-
 
 
 {% endblock %}

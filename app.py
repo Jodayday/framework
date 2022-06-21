@@ -31,12 +31,13 @@ def hello():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    username = session.get('username', '')
     form = LoginFrom()
     if form.validate_on_submit():
         user = User.query.filter_by(userid=form.data.get('userid')).first()
         session['username'] = user.username
         return redirect('/')
-    return render_template('login.html', login=form)
+    return render_template('login.html', login=form, user=username)
 
 # 로그아웃
 
@@ -52,6 +53,7 @@ def logout():
 
 @app.route('/register/', methods=['GET', 'POST'])
 def join():
+    username = session.get('username', '')
     form = RegisterForm()
 
     if form.validate_on_submit():
@@ -65,25 +67,27 @@ def join():
 
         return redirect('/')
 
-    return render_template('register.html', Register=form)
+    return render_template('register.html', Register=form, user=username)
 
 # 개별 문제 확인
 
 
 @app.route('/problem/<int:count>/')
 def problem(count: int = None):
+    username = session.get('username', '')
     problem = Problem.query.filter_by(id=count).first()
-    return render_template('one_problem.html', problem=problem)
+    return render_template('one_problem.html', problem=problem, user=username)
 
 # 문제들 확인
 
 
 @app.route('/problem/')
 def problems():
+    username = session.get('username', '')
     page = request.args.get('page', type=int, default=1)  # 페이지
     problem = Problem.query.order_by(Problem.id.desc())
     problem = problem.paginate(page, per_page=15)
-    return render_template('problem.html', list=problem)
+    return render_template('problem.html', list=problem, user=username)
 
 # # 문제 등록
 # @app.route('/problem/')
@@ -96,6 +100,7 @@ def problems():
 
 @app.route('/start/', methods=['GET', 'POST'])
 def start():
+    username = session.get('username', '')
     form = GetForm()
     dicts = request.args.to_dict()
     if dicts:
@@ -104,14 +109,15 @@ def start():
         problems = Problem.query.all()
         select_problems = random.choices(problems, k=number)
         select_problems = set(select_problems)
-        return render_template('start.html', form=form, pro=select_problems)
-    return render_template('start.html', form=form)
+        return render_template('start.html', form=form, pro=select_problems, user=username)
+    return render_template('start.html', form=form, user=username)
 
 # 문제 제출
 
 
 @app.route('/submission/')
 def subminssion():
+    username = session.get('username', '')
     dicts = request.args.to_dict()
     user = session.get('username')
     user_id = User.query.filter_by(username=user).first()
@@ -130,15 +136,17 @@ def subminssion():
 
 @app.route('/check/')
 def checks():
+    username = session.get('username', '')
     page = request.args.get('page', type=int, default=1)  # 페이지
     solve = Solve.query.order_by(Solve.check)
     solve = solve.paginate(page, per_page=15)
-    return render_template('check.html', list=solve)
+    return render_template('check.html', list=solve, user=username)
 # 개별풀이 확인
 
 
 @app.route('/check/<int:count>/')
 def check(count: int = None):
+    username = session.get('username', '')
     dicts = request.args.to_dict()
     if dicts:
         one = Solve.query.filter_by(id=count).first()
@@ -147,13 +155,14 @@ def check(count: int = None):
         db.session.commit()
         return redirect('/check/')
     sovle = Solve.query.filter_by(id=count).first()
-    return render_template('one_check.html', sovle=sovle)
+    return render_template('one_check.html', sovle=sovle, user=username)
 
 # 문제등록
 
 
 @app.route('/create/')
 def create():
+    username = session.get('username', '')
     dicts = request.args.to_dict()
     print(dicts)
     if dicts:
@@ -163,7 +172,7 @@ def create():
         db.session.add(problem)
         db.session.commit()
         return redirect('/')
-    return render_template('create.html')
+    return render_template('create.html', user=username)
 
 
 # db 설정
