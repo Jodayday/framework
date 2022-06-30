@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;  ">
-<h1>testing</h1>
+<div style="border-radius: 1rem; margin: 2rem; text-align: center;  ">
+<h1 class="font_google" >testing</h1>
 
 <form action="{% url 'accountapp:hi' %}" method="post">
     {% csrf_token %}
-    <input type="submit" class="btn btn-primary" value="POST" >
+    <div>
+        <input type="text" name="hi_input">
 
+    </div>
+
+
+    <div>
+    <input type="submit" class="btn btn-primary" value="POST" >
+    </div>
 </form>
 
-<h2>{{text}}</h2>
-
+{% if new_hi %}
+<h2>{{new_hi}}</h2>
+<h2>{{new_hi.text}}</h2>
+{% endif %}
 
 </div>
 {% endblock %}
