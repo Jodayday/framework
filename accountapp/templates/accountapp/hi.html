@@ -17,10 +17,13 @@
     </div>
 </form>
 
-{% if new_hi %}
-<h2>{{new_hi}}</h2>
-<h2>{{new_hi.text}}</h2>
+{% if hi_list %}
+{% for hi in hi_list %}
+<h5>{{hi.text}}</h5>
+{% endfor %}
 {% endif %}
+
+
 
 </div>
 {% endblock %}
