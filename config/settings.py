@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'bootstrap5',
 
     'accountapp.apps.AccountappConfig',
+    'profileapp.apps.ProfileappConfig',
 ]
 
 MIDDLEWARE = [
