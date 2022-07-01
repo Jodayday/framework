@@ -16,4 +16,30 @@
 
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    
+    <!-- 네이버 폰트 사용-->
+    <style>
+        @font-face {
+            font-family: 'mbb';
+            src:url("{% static 'fonts/MaruBuri-Bold.otf' %}") format("opentype") ; 
+        }
+        @font-face {
+            font-family: 'mbe';
+            src: url("{% static 'MaruBuri-ExtraLight.otf' %}") format("opentype") ; 
+        }
+        @font-face {
+            font-family: 'mbl';
+            src: url("{% static 'MaruBuri-Light.otf' %}") format("opentype") ; 
+        }
+        @font-face {
+            font-family: 'mbr';
+            src: url("{% static 'MaruBuri-Regular.otf' %}") format("opentype") ; 
+        }
+        @font-face {
+            font-family: 'mbs';
+            src:  url("{% static 'MaruBuri-SemiBold.otf' %}") format("opentype") ; 
+        }
+
+
+    </style>
 </head>
