@@ -5,12 +5,21 @@
 
 <div>
     <div style="text-align:center; max-width: 500px; margin: 4rem auto;">
+
         <p>
             {{ target_user.date_joined }}
         </p>
+        {% if target_user.profile %}
         <h2 style="font-family: mbe;">
-            {{ target_user.username }}
+            {{ target_user.profile.nickname }}
         </h2>
+        {%else%}
+        <a href="{% url 'profileapp:create' %}">
+            <h2 style="font-family: mbe;">
+               Create Profile
+            </h2>
+        </a>
+        {%endif%}
 
         {% if target_user == user %}
         <a href="{% url 'accountapp:update' pk=user.id %}">
