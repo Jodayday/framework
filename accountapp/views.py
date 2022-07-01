@@ -1,18 +1,25 @@
-from django.shortcuts import redirect, render
+# 로그인 확인 데코레이터
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.urls import reverse, reverse_lazy
+from django.shortcuts import redirect, render
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+# User create file
+from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
-
-
 from accountapp.models import hi
 
 # Create your views here.
 
+has_ownership = [login_required, account_ownership_required]
 
+
+@login_required
 def index(request):
-    hi_list = hi.objects.all().order_by('-pk')
+
     if request.method == "POST":
 
         temp = request.POST.get('hi_input')
@@ -20,7 +27,16 @@ def index(request):
         new_hi.text = temp
         new_hi.save()
         return redirect(reverse('accountapp:hi'))
+    hi_list = hi.objects.all().order_by('-pk')
     return render(request, 'accountapp/hi.html', context={'hi_list': hi_list})
+
+
+def s(func):
+    def f():
+        print('start')
+        func()
+        print('end')
+    return f
 
 
 class AccountCreateView(CreateView):
@@ -36,6 +52,8 @@ class AccountDetailView(DetailView):
     template_name = 'accountapp/detail.html'
 
 
+@method_decorator(has_ownership, name='get')
+@method_decorator(has_ownership, name='post')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountUpdateForm
@@ -44,6 +62,8 @@ class AccountUpdateView(UpdateView):
     template_name = 'accountapp/update.html'
 
 
+@method_decorator(has_ownership, name='get')
+@method_decorator(has_ownership, name='post')
 class AccountDeleteview(DeleteView):
     model = User
     context_object_name = 'target_user'
