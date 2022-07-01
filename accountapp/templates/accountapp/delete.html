@@ -7,7 +7,7 @@
         <h4>Quit</h4>
     </div>
 <div>
-    <form action="{% url 'accountapp:delete' pk=user.id %}" method="post">
+    <form action="{% url 'accountapp:delete' pk=target_user.id %}" method="post">
         {% csrf_token %}
 
         <input type="submit" value="탈퇴">
