@@ -13,7 +13,6 @@ class ProfileCreateView(CreateView):
     model = Profile
     form_class = ProfileCreateForm
     context_object_name = 'target_profile'
-    success_url = reverse_lazy('accountapp:hi')
     template_name = 'profileapp/create.html'
 
     def form_valid(self, form):
@@ -23,6 +22,10 @@ class ProfileCreateView(CreateView):
         temp.save()
         return super().form_valid(form)
 
+    def get_success_url(self) -> str:
+        """ 성공시 이동할 url """
+        return reverse_lazy('accountapp:detail', kwargs={'pk': self.object.user.pk})
+
 
 @method_decorator(profile_ownership_required, 'get')
 @method_decorator(profile_ownership_required, 'post')
@@ -30,5 +33,7 @@ class ProfileUpdateView(UpdateView):
     model = Profile
     form_class = ProfileCreateForm
     context_object_name = 'target_profile'
-    success_url = reverse_lazy('accountapp:hi')
     template_name = 'profileapp/update.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('accountapp:detail', kwargs={'pk': self.object.user.pk})
