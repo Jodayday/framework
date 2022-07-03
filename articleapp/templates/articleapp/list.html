@@ -30,6 +30,11 @@
   </div>
 
   {% endfor %}
+  <div style="text-align: center;">
+    <a href="{% url 'articleapp:create' %}">
+      Create Article
+    </a>
+  </div>
 </div>
 
 <script src="{% static 'js/magicGrid.js' %}"></script>
