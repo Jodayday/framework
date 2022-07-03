@@ -22,21 +22,31 @@
 </style>
 
 
-<!DOCTYPE html>
+<div style="text-align: center;">
+  <a href="{% url 'articleapp:create' %}">
+    Create Article
+  </a>
+</div>
 <div class="container">
-  {% for x in '0123456789'|make_list %}
-  <div class="item{{x}}">
-    <img src="https://picsum.photos/200/300" alt="" srcset="">
-  </div>
+  {% if article_list %}
+  {% for article in article_list %}
+    <a href="{% url 'articleapp:detail' pk=article.pk %}">
+      <!-- 불러오는 파일에 전달 with 안에사용=밖전달 -->
+      {% include 'snippets/card.html' with article=article %}
+    </a>
 
   {% endfor %}
+  <script src="{% static 'js/magicGrid.js' %}"></script>
+  {% else %}
   <div style="text-align: center;">
-    <a href="{% url 'articleapp:create' %}">
-      Create Article
-    </a>
+    <h2>No Articles YET!</h2>
   </div>
-</div>
 
-<script src="{% static 'js/magicGrid.js' %}"></script>
+  {% endif %}
+
+</div>
+{% include 'snippets/pagination.html' with page_obj=page_obj %}
+
+
 
 {% endblock %}

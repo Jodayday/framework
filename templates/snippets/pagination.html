@@ -1,0 +1,32 @@
+<div style="text-align: center; margin:1rem 0;">
+    {% if page_obj.has_previous %}
+    <a href="{% url 'articleapp:list' %}?page={{page_obj.previous_page_number}}"
+    class="btn btn-secondary rounded-pill">
+        이전
+    </a>
+    {% else %}
+    <span class="btn btn-secondary rounded-pill">
+        이전
+    </span>
+    {% endif %}
+
+    {% for page in page_obj.paginator.page_range %}
+    <a href="{% url 'articleapp:list' %}?page={{page}}"
+    class="btn btn-secondary rounded-pill {% if page == page_obj.number %}active{%endif%} ">
+        {{page}}
+    </a>
+    {% endfor %}
+
+
+    {% if page_obj.has_next %}
+    <a href="{% url 'articleapp:list' %}?page={{page_obj.next_page_number}}"
+    class="btn btn-secondary rounded-pill">
+        다음
+    </a>
+    {% else %}
+    <span class="btn btn-secondary rounded-pill">
+        다음
+    </span>
+    {% endif %}
+
+</div>
