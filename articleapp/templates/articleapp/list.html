@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    
+.container div {
+  width: 250px;
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border-radius: 2rem;
+}
+.container img{
+  width: 100%;
+  border-radius: 2rem;
+}
+
+
+</style>
+
+
+<!DOCTYPE html>
+<div class="container">
+  {% for x in '0123456789'|make_list %}
+  <div class="item{{x}}">
+    <img src="https://picsum.photos/200/300" alt="" srcset="">
+  </div>
+
+  {% endfor %}
+</div>
+
+<script src="{% static 'js/magicGrid.js' %}"></script>
+
+{% endblock %}
