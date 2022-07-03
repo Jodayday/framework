@@ -31,14 +31,6 @@ def index(request):
     return render(request, 'accountapp/hi.html', context={'hi_list': hi_list})
 
 
-def s(func):
-    def f():
-        print('start')
-        func()
-        print('end')
-    return f
-
-
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
