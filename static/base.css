@@ -16,3 +16,13 @@ font-family: 'Hahmlet', serif;
         font-size: 12px;
     }
 }
+:root a {
+    color: black;
+}
+a:hover{
+    color: black;
+    text-decoration: none;
+}
+.prgmatic_header_nav{
+    margin: 0 1rem;
+}

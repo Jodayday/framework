@@ -9,7 +9,7 @@
 
         
         {% if target_user.profile %}
-        <img src="{{ target_user.profile.image.url }}" alt="logo img" style="height: 10rem;width: 10rem; border-radius: 10rem; margin-bottom: 1rem;">
+        <img src="{{ target_user.profile.image.url }}" alt="logo img" style="height: 10rem;width: 10rem;object-fit: cover; border-radius: 10rem; margin-bottom: 1rem;">
         <h2 style="font-family: mbe;">
             {{ target_user.profile.nickname }}
             {% if target_user == user %}

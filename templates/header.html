@@ -2,25 +2,27 @@
     <div>
         <h1 class="mt_1rem font_google">JO DAY</h1>
     </div>
-    <div>
-        <a href="{% url 'articleapp:list' %}">
+    <div style="margin: 1rem 0;">
+        <a href="{% url 'articleapp:list' %}" style="margin: 0 0.5rem;">
             <span>Articles</span>
         </a>
-        <span>nav2</span>
+        <a href="{% url 'projectapp:list' %}" style="margin: 0 0.5rem;">
+            <span>Project</span>
+        </a>
         <span>nav3</span>
         {% if not user.is_authenticated %}
-        <a href="{% url 'accountapp:login' %}">
+        <a href="{% url 'accountapp:login' %}" style="margin: 0 0.5rem;">
             <span>login</span>
         </a>
-        <a href="{% url 'accountapp:create' %}">
+        <a href="{% url 'accountapp:create' %}" style="margin: 0 0.5rem;">
             <span>SignUp</span>
         </a>
         {% else %}
-        <a href="{% url 'accountapp:detail' pk=user.pk %}">
+        <a href="{% url 'accountapp:detail' pk=user.pk %}" style="margin: 0 0.5rem;">
             <span>mypage</span>
         </a>
         <!-- next로 인자를 넘겨주어 해당위치로 이동된다  -->
-        <a href="{% url 'accountapp:logout' %}">
+        <a href="{% url 'accountapp:logout' %}" style="margin: 0 0.5rem;">
             <span>logout</span>
         </a>
         {% endif %}

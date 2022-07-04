@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div>
+    <div style="text-align:center; max-width: 500px; margin: 4rem auto;">
+
+
+
+        <img src="{{ target_project.image.url }}" alt="logo img"
+        style="object-fit: cover; height: 10rem;width: 10rem; border-radius: 10rem; margin-bottom: 1rem;">
+        <h2 style="font-family: mbe;">
+
+            {{ target_project.title }}
+        </h2>
+        <h6 style="margin-bottom: 2rem;">
+            {{ target_project.description }}
+        </h6>
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}
