@@ -10,3 +10,9 @@ text-align: center; margin: 2rem;}
 .font_google{
 font-family: 'Hahmlet', serif;
 }
+
+@media screen and (max-width:500px){
+    html{
+        font-size: 12px;
+    }
+}
