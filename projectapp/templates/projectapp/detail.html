@@ -17,7 +17,22 @@
         <h6 style="margin-bottom: 2rem;">
             {{ target_project.description }}
         </h6>
+        {% if user.is_authenticated %}
+        {% if not subscription %}
+        <div class="text-center" >
+            <a class="btn btn-primary rounded-pill px-4"  href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}">
+                Subscribe
+            </a>
+        </div>
+        {% else %}
+        <div class="text-center" >
+            <a class="btn btn-dark rounded-pill px-4"  href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}">
+                Unsubscribe
+            </a>
+        </div>
+        {% endif %}
 
+        {% endif %}
 
     </div>
 </div>
