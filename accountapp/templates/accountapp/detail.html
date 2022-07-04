@@ -13,8 +13,10 @@
         <h2 style="font-family: mbe;">
             {{ target_user.profile.nickname }}
             {% if target_user == user %}
-            <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-                edit
+            <a class="material-icons"   href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                <span class="material-icons">
+                    edit
+                    </span>
             </a>
             {%endif%}
         </h2>
@@ -23,7 +25,7 @@
         </h6>
         {%else%}
         {% if target_user == user %}
-        <a href="{% url 'profileapp:create' %}">
+        <a class="material-icons" href="{% url 'profileapp:create' %}">
             <h2 style="font-family: mbe;">
                Create Profile
             </h2>
@@ -36,11 +38,15 @@
             {{ target_user.date_joined }}
         </p>
         {% if target_user == user %}
-        <a href="{% url 'accountapp:update' pk=user.id %}">
-            <p>Change Info</p>
+        <a  href="{% url 'accountapp:update' pk=user.id %}">
+            <span class="material-icons">
+                settings
+                </span>
         </a>
-        <a href="{% url 'accountapp:delete' pk=user.id %}">
-            <p>Quit</p>
+        <a  href="{% url 'accountapp:delete' pk=user.id %}">
+            <span class="material-icons">
+                delete
+                </span>
         </a>
 
         {% endif %}

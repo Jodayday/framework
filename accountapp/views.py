@@ -10,26 +10,11 @@ from django.views.generic.list import MultipleObjectMixin
 # User create file
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
-from accountapp.models import hi
 from articleapp.models import Article
 
 # Create your views here.
 
 has_ownership = [login_required, account_ownership_required]
-
-
-@login_required
-def index(request):
-
-    if request.method == "POST":
-
-        temp = request.POST.get('hi_input')
-        new_hi = hi()
-        new_hi.text = temp
-        new_hi.save()
-        return redirect(reverse('accountapp:hi'))
-    hi_list = hi.objects.all().order_by('-pk')
-    return render(request, 'accountapp/hi.html', context={'hi_list': hi_list})
 
 
 class AccountCreateView(CreateView):
