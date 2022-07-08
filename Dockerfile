@@ -2,8 +2,6 @@ FROM python:3.9
 
 WORKDIR /home/
 
-RUN echo "testing1"
-
 RUN git clone -b django --single-branch https://github.com/Jodayday/framework.git
 
 WORKDIR /home/framework/
